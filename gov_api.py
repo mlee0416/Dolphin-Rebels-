@@ -8,11 +8,21 @@ Script for pulling data from government APIs, merging them into a
 pandas dataframe and saving the results in a csv sheet
 
 """
-import requests
-import json
+
 import pandas as pd
+from sodapy import Socrata
+
 
 # pull pop, ethnicity, gender, and age groups by censu tract
-url = "https://data.lacounty.gov/resource/qc6w-c878.json"
+# from County of Los Angeles Open Data, see url for source
+url = "https://data.lacounty.gov/resource/qc6w-c878.csv"
 
-response = requests.get(url)
+client = Socrata("data.lacounty.gov", None)
+
+demographics_results = client.get("qc6w-c878")
+
+demo_df = pd.DataFrame.from_records(demographics_results)
+
+
+
+
