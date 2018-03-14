@@ -28,16 +28,21 @@ df['census_tract']
 edu_df = pd.read_excel('raw_data/educational_data.xlsx',
               sheetname="HCI_Educational_Attainment_355")
 
-#filter down to just LA
-la_edu_df = edu_df
-
+#filter down to just Census tracts
 ct_edu_df = edu_df[edu_df['geotype'] == 'CT']
 
+#filter down to just Los Angeles
 la_edu_df = ct_edu_df[ct_edu_df['county_name'] == 'Los Angeles']
 
+#filter down to just total pop not by ethnicity
 total_la_df = la_edu_df[la_edu_df['race_eth_name'] == 'Total']
 
-final_edu_df = total_la_df[total_la_df['reportyear'] == '2011-2015']
+#filter down to just use the most recent version of the survey
+recent_version_df = total_la_df[total_la_df['version'] == 'Thu Aug 03 13:10:05 2017']
+
+#filter down to just the most recent survey
+final_edu_df = recent_version_df[recent_version_df['reportyear'] == '2011-2015']
+
 
 #remove the first 4 numbers of the census tract number so it matches the census tracts in the main df
 short_tracts = []
@@ -47,10 +52,20 @@ for i in final_edu_df['geotypevalue']:
     short_tracts.append(str(i)[4:])
 
 final_edu_df['census_tract'] = short_tracts
-    
+
+
+len(final_edu_df[['census_tract', 'estimate']].dropna(how='any'))
+
+#pick columns to save from education dataframe
+include = ['census_tract','estimate','CA_decile']
+
+#save data to file
+df = pd.merge(df, final_edu_df[include], how='left', on='census_tract')
 
 
 
-final_edu_df[['census_tract', 'estimate']].dropna(how='any')
+df.to_csv('census_data.csv')
 
-pd.merge(df, final_edu_df[['census_tract', 'estimate']], how='left', on='census_tract').head()
+health_df = pd.read_csv()
+
+
