@@ -1,0 +1,26 @@
+Field,Value
+Title,"Deaths by ZIP Code by Age, 2013"
+URL,deaths-by-zip-code-by-age-2013
+Description,"This dataset is for death of California residents, by Zip Code, by age group by place of residence. The death counts per age group, represents the deaths to California residents, regardless of the place of death occurrence. A non-California resident who die inside of California would not be included in the dataset.
+
+Death Profiles by ZIP Code are tabulations of the number of deaths to California residents by ZIP Code of decedent’s residence. Data are aggregated by decedent's sex, age, and cause of death and is obtained from registered death certificates for California residents who died in California and from registered in other states for California residents who died out of state. Deaths by these key indicators provide significantly more detail than countywide data in monitoring a community’s health status. Moreover, death data at the ZIP Code level, can be used to perform small area analysis to identify and target areas within cities and counties where public health programs may be needed. Age Categories: Decedent's age was stratified into the same categories commonly used by the National Center for Health Statistics (NCHS). The categories are: under one year of age; 1 to 4; 5 to 14; 15 to 24; 25 to 34; 35 to 44; 45 to 54; 55 to 64; 65 to 74; 75 to 84; 85 and over. http://www.cdph.ca.gov/data/statistics/Pages/DeathProfilesbyZIPCode.aspx"
+Tags,"agem mortality,death,death rate,zip code"
+Organization,California Department of Public Health
+Contact Email,opendata@cdph.ca.gov
+Program,CDPH-CHSI-PHPRB-HIRS
+Homepage URL,None
+Temporal Coverage,2013
+Spatial/Geographic Coverage,California
+Geographic Granularity,ZIP Code
+Language,English (EN)
+Frequency,Annually
+De-Identification Method,Not applicable for death data
+Source Link,https://archive.cdph.ca.gov/data/statistics/Pages/DeathProfilesbyZIPCode.aspx
+Data Collection Tool,California Electronic Death Registration System
+License,See Terms of Use
+Limitations,Use of this data is subject to the CHHS Terms of Use and any copyright and proprietary notices incorporated in or accompanying the individual files.
+Additional Limitations,
+Additional Information,
+Related Resources,
+Secondary Sources,
+Citation,"State of California, Department of Public Health, Death and Birth Records. 2015."
