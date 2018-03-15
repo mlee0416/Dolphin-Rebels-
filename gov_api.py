@@ -57,15 +57,59 @@ final_edu_df['census_tract'] = short_tracts
 len(final_edu_df[['census_tract', 'estimate']].dropna(how='any'))
 
 #pick columns to save from education dataframe
-include = ['census_tract','estimate','CA_decile']
+include = ['census_tract','estimate']
 
 #save data to file
 df = pd.merge(df, final_edu_df[include], how='left', on='census_tract')
 
 
+#select only important columns rename estimate to reflect that it's a percentage of bachelor degree holders
+columns_to_keep = ['africanamerican138', 'africanamerican200',
+       'age_0_15_138', 'age_0_15_200', 'age_16_18_138', 'age_16_18_200',
+       'age_19_20_138', 'age_19_20_200', 'age_21_25_138', 'age_21_25_200',
+       'age_26_59_138', 'age_26_59_200', 'age_60_64_138', 'age_60_64_200',
+       'age_65up_138', 'age_65up_200', 'asian138', 'asian200', 'census_tract',
+       'cityname', 'female138', 'female200', 'latino138', 'latino200',
+       'male138', 'male200', 'multi_race138', 'nativeamerican138',
+       'nativeamerican200', 'other138', 'otherrace200', 'pacific_islander138',
+       'pacificislander200', 'service_area', 'two_more200', 'white138',
+       'white200', 'estimate']
+
+
+df = df[columns_to_keep].rename(columns={'estimate':'percent_bachelors'})
+
+
+# aggregate pop stats into totals, also convert the columns to integers
+def get_total(column1, column2):
+    #take off the FPL codes and rename total
+    total_column_name = column1[:-3] + 'total'
+    
+    #convert columns to integers
+    df[column1] = df[column1].astype('int')
+    df[column2] = df[column2].astype('int')
+    
+    # sum up the pops for 138 line and 200 line to get the total
+    df[total_column_name] = df[[column1,column2]].sum(axis=1)
+    
+    
+columns_to_aggregate = [['africanamerican138', 'africanamerican200'],
+       ['age_0_15_138', 'age_0_15_200'], ['age_16_18_138', 'age_16_18_200'],
+       ['age_19_20_138', 'age_19_20_200'], ['age_21_25_138', 'age_21_25_200'],
+       ['age_26_59_138', 'age_26_59_200'], ['age_60_64_138', 'age_60_64_200'],
+       ['age_65up_138', 'age_65up_200'], ['asian138', 'asian200'],
+       ['female138', 'female200'], ['latino138', 'latino200'],
+       ['male138', 'male200'], ['multi_race138','two_more200'], ['nativeamerican138',
+       'nativeamerican200'], ['other138', 'otherrace200'], ['pacific_islander138',
+       'pacificislander200'], ['white138',
+       'white200']]    
+
+for column1, column2 in columns_to_aggregate:
+    get_total(column1, column2)
+
+df.head()    
 
 df.to_csv('census_data.csv')
 
-health_df = pd.read_csv()
+
 
 
