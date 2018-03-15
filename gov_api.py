@@ -106,7 +106,13 @@ columns_to_aggregate = [['africanamerican138', 'africanamerican200'],
 for column1, column2 in columns_to_aggregate:
     get_total(column1, column2)
 
-df.head()    
+# get total pop for census tract
+df['total_pop'] = df[['femaletotal','maletotal']].sum(axis=1)
+
+# get total bachelors degree holders
+df['total_bachelors'] = df['total_pop'] / df['percent_bachelors']
+
+df.head()     
 
 df.to_csv('census_data.csv')
 
