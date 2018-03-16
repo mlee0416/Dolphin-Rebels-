@@ -1,0 +1,9 @@
+GitBash in the folder with the wheels
+
+source activate PythonData 
+pip install GDAL<press tab>
+pip install Fiona<tab>
+pip install pyproj<tab>
+pip install rtree<press tab>
+pip install shapely<press tab>
+pip install geopandas
