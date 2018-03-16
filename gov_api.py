@@ -112,6 +112,8 @@ df['total_pop'] = df[['femaletotal','maletotal']].sum(axis=1)
 # get total bachelors degree holders
 df['total_bachelors'] = df['total_pop'] * (df['percent_bachelors'] / 100)
 
+
+
 df['bachelors_percap'] = df['total_bachelors'] / df['total_pop']
 
 df.head()     
