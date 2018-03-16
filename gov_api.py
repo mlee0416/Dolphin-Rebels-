@@ -109,6 +109,11 @@ for column1, column2 in columns_to_aggregate:
 # get total pop for census tract
 df['total_pop'] = df[['femaletotal','maletotal']].sum(axis=1)
 
+
+def get_percap(column_name):
+    df[column_name + '_percap'] = df[column_name] / df['total_pop']
+    
+
 # get total bachelors degree holders
 df['total_bachelors'] = df['total_pop'] * (df['percent_bachelors'] / 100)
 
@@ -121,5 +126,11 @@ df.head()
 df.to_csv('census_data.csv')
 
 
+# pull out total impoverished and not impoverished. 
+df['impoverished_percap'] = df[['male138', 'female138']].sum(axis=1) / df['total_pop']
+df['not_impoverished_percap'] = df[['male200', 'female200']].sum(axis=1)
+
+df[['census_tract', 'total_pop','not_impoverished_percap','impoverished_percap', ]].to_csv('poverty_rates.csv')
 
 
+s
