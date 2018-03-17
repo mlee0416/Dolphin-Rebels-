@@ -133,4 +133,4 @@ df['not_impoverished_percap'] = df[['male200', 'female200']].sum(axis=1)
 df[['census_tract', 'total_pop','not_impoverished_percap','impoverished_percap', ]].to_csv('poverty_rates.csv')
 
 
-s
+
