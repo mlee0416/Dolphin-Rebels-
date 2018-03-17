@@ -115,22 +115,33 @@ def get_percap(column_name):
     
 
 # get total bachelors degree holders
-df['total_bachelors'] = df['total_pop'] * (df['percent_bachelors'] / 100)
+df['bachelors_percap'] = (6000 * (df['percent_bachelors'] / 100)) / 6000
 
 
-
-df['bachelors_percap'] = df['total_bachelors'] / df['total_pop']
 
 df.head()     
 
-df.to_csv('census_data.csv')
+
 
 
 # pull out total impoverished and not impoverished. 
-df['impoverished_percap'] = df[['male138', 'female138']].sum(axis=1) / df['total_pop']
-df['not_impoverished_percap'] = df[['male200', 'female200']].sum(axis=1)
+df['138_percap'] = df[['male138', 'female138']].sum(axis=1) / 6000
+df['200_percap'] = df[['male200', 'female200']].sum(axis=1)
 
-df[['census_tract', 'total_pop','not_impoverished_percap','impoverished_percap', ]].to_csv('poverty_rates.csv')
+# get broad census tracts based off of the first 3 numbers
+tract_groups = []
+for i in df['census_tract']:
+    print(i)
+    print(str(i)[:2])
+    tract_groups.append(str(i)[:2])
+
+df['tract_group'] = tract_groups
+
+df['tract_group'].value_counts()[:50]
+
+df[['tract_group','census_tract', 'total_pop','not_impoverished_percap','impoverished_percap', ]].to_csv('poverty_rates.csv')
+
+len(df.groupby('tract_group')['total_pop'].sum())
 
 
-
+df.to_csv('census_data.csv')
