@@ -10,4 +10,6 @@ df = df[df['city'] == "Los Angeles"]
 
 results = []
 for index,row in df.iterrows():
-    response = cg.coordinates(y=row['Latitude'], x=row['Longitude'])
+    print(row['Latitude'])
+    print(row['Longitude'])
+    response = cg.coordinates(x=row['Latitude'], y=row['Longitude'])
