@@ -11,7 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-df = pd.read_csv('census_data.csv', index_col='Unnamed: 0')
+df = pd.read_csv('kaggle_census.csv', index_col='Unnamed: 0')
 
 
 df.columns
@@ -50,4 +50,18 @@ plt.savefig('poverty_bachelors_regplot.png')
 
 plt.scatter(df['age_0_15_total'], df['maletotal'])
 
+
+
+for x in df[['Hispanic', 'White', 'Black', 'Native', 'Asian', 'Pacific']]:
+    sns.distplot(df[x], hist=False)
+    plt.title(f"distribution of ethnicity:{x} in LA Census Tracts")
+    plt.show()
+
+for x in df[['IncomePerCap', 'ChildPoverty', 'Unemployment']]:
+    sns.kdeplot(df[x], shade=True, kernel='cos')
+    plt.title(f"distribution of {x} in LA Census Tracts")
+    plt.show()
+
+
+sns.regplot(y=df['IncomePerCap'], x=df['ChildPoverty'])
 
