@@ -21,7 +21,7 @@ totals_df = df[['total_bachelors', 'africanamericantotal', 'age_0_15_total',
        'age_26_59_total', 'age_60_64_total', 'age_65up_total', 'asiantotal',
        'femaletotal', 'latinototal', 'maletotal', 'multi_racetotal',
        'nativeamericantotal', 'othertotal', 'pacific_islandertotal',
-       'whitetotal', 'total_pop', 'total_bachelors', 'bachelors_percap']]
+       'whitetotal', 'total_pop', 'percent_bachelors',]]
 
 plt.rcParams["figure.figsize"] = (12,10)
 sns.set_context('paper')
@@ -30,13 +30,24 @@ corr_map = sns.heatmap(totals_df.corr(),cmap='autumn', annot=True)
 fig = corr_map.get_figure()
 fig.savefig("census_corr_heatmap.png")
 
-plt.scatter(df['total_bachelors'], df['total_pop'])
-plt.title("total population vs total number of bachelors holders")
-plt.ylabel('total population')
-plt.xlabel('total_bachelors')
-plt.savefig('total_pop_bachelors_scatterplot.png')
+plt.style.use('fivethirtyeight')
+plt.scatter(df['percent_bachelors'], df['total_pop'])
+plt.title("Poverty vs Higher Education by census tract")
+plt.ylabel('total population qualifying for social assistance')
+plt.xlabel('percent of pop holding a bachelors degree')
+plt.savefig('poverty_bachelors_scatterplot.png')
+
+sns.regplot(y='total_pop', x='percent_bachelors', data=df, color='forestgreen',
+            logx=True, x_bins=30, truncate=True, fit_reg=False)
+plt.tick_params(axis='both',width=2,labelsize=12)
+plt.text(15, 5400,"Poverty vs Higher Education by Census Tract",fontsize=25 )
+plt.ylabel('total population qualifying for social assistance')
+plt.xlabel('percent of pop holding a bachelors degree')
+#plt.xlim(0,100)
+#plt.ylim(0,10000)
+plt.savefig('poverty_bachelors_regplot.png')
 
 
-g = sns.PairGrid(totals_df)
-g.map_diag(sns.kdeplot)
-g.map_offdiag(sns.kdeplot, cmap="Blues_d", n_levels=6)
+plt.scatter(df['age_0_15_total'], df['maletotal'])
+
+
