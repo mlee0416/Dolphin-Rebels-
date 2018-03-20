@@ -22,7 +22,7 @@ for i in pov_edu['census_tract']:
 
 pov_edu['CensusTract'] = censustracts
 
-df = pd.merge(la, pov_edu, how='left', on='CensusTract')
+df = pd.merge(left=la, right=pov_edu, how='left', on='CensusTract')
 
 
 df.to_csv('kaggle_census.csv')
