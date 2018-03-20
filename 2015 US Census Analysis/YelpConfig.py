@@ -1,0 +1,3 @@
+#Yelp API
+api_key="HTxE_2fiZiukf88_6zgw-998n3g0Hp2VCZVttuzh8PYAVGYnMqjyF-20vFikX40klyhOv4-s98YvoQNi0WoNSqRkLhKzc6Go8PCNpheK3map5VsYo69Sl5haqpaoWnYx"
+client_ID="-7_tzeiRkxmaXZ-G7LcLVw"
